@@ -1,0 +1,12 @@
+{
+  "name": "afterme-ai-service",
+  "version": "1.2.0",
+  "description": "AI personality cloning and voice synthesis service",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "python src/main.py",
+    "start": "python src/main.py"
+  },
+  "description": "Python-based AI service - see src/requirements.txt for Python dependencies"
+}

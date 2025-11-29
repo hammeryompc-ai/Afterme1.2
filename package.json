@@ -1,0 +1,20 @@
+{
+  "name": "afterme",
+  "version": "1.2.0",
+  "description": "Premium messenger with AI personality cloning for digital legacy",
+  "private": true,
+  "workspaces": [
+    "packages/frontend",
+    "packages/backend",
+    "packages/ai-service"
+  ],
+  "scripts": {
+    "install-all": "npm install && npm install --workspace=packages/frontend && npm install --workspace=packages/backend && npm install --workspace=packages/ai-service",
+    "dev": "concurrently \"npm run dev --workspace=packages/backend\" \"npm run dev --workspace=packages/frontend\" \"npm run dev --workspace=packages/ai-service\"",
+    "build": "npm run build --workspace=packages/frontend && npm run build --workspace=packages/backend",
+    "start": "npm start --workspace=packages/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
