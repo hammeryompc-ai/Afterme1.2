@@ -16,10 +16,11 @@ target 'App' do
   capacitor_pods
   # Add your Pods here
   
-  # Capacitor plugins
-  pod 'CapacitorSplashScreen', :path => '../../node_modules/@capacitor/splash-screen'
-  pod 'CapacitorStatusBar', :path => '../../node_modules/@capacitor/status-bar'
-  pod 'CapacitorKeyboard', :path => '../../node_modules/@capacitor/keyboard'
+  # Note: Capacitor plugins are auto-linked when using `npx cap sync`
+  # The following pods will be added automatically after running cap sync:
+  # - CapacitorSplashScreen
+  # - CapacitorStatusBar  
+  # - CapacitorKeyboard
 end
 
 post_install do |installer|
