@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.afterme.app"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.afterme.app"
+        minSdk 22
+        targetSdk 34
+        versionCode 1
+        versionName "1.2.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Signing configuration placeholder
+            // Uncomment and configure for release builds
+            // signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    // Uncomment and configure for release signing
+    // signingConfigs {
+    //     release {
+    //         storeFile file("your-keystore.jks")
+    //         storePassword System.getenv("KEYSTORE_PASSWORD") ?: ""
+    //         keyAlias System.getenv("KEY_ALIAS") ?: ""
+    //         keyPassword System.getenv("KEY_PASSWORD") ?: ""
+    //     }
+    // }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+repositories {
+    flatDir {
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    
+    // Capacitor
+    implementation project(':capacitor-android')
+    implementation project(':capacitor-cordova-android-plugins')
+    
+    // AndroidX
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
+    implementation "androidx.core:core-splashscreen:1.0.1"
+    
+    // Google Material Design
+    implementation "com.google.android.material:material:1.11.0"
+    
+    // WebView
+    implementation "androidx.webkit:webkit:1.9.0"
+    
+    // Testing
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
+}
+
+apply from: 'capacitor.build.gradle'
