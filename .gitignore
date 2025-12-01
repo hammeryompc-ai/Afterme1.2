@@ -63,6 +63,9 @@ packages/frontend/android/.idea/
 packages/frontend/android/captures/
 packages/frontend/android/.externalNativeBuild/
 packages/frontend/android/.cxx/
+packages/frontend/android/gradle/wrapper/gradle-wrapper.jar
+packages/frontend/android/gradlew
+packages/frontend/android/gradlew.bat
 
 # Android signing keys (NEVER commit these!)
 *.keystore
