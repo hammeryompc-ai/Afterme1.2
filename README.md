@@ -49,8 +49,15 @@ Afterme is a premium messaging platform with Facebook Messenger-level quality, c
 ## 🚀 Quick Start
 
 ### Option 1: Docker Compose (Recommended)
+
+**Environment Setup:** The backend service loads secrets from a `.env` file in the repo root. A default `.env` is provided for local development with a placeholder `JWT_SECRET`. You can customize it as needed.
+
 ```bash
-docker-compose up
+# Validate configuration before starting
+docker compose -f docker-compose.yml config
+
+# Start all services
+docker compose up
 ```
 - Frontend: http://localhost:3000
 - Backend: http://localhost:5000
