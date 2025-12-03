@@ -1,6 +1,6 @@
-docker-compose.yml
 # Docker Compose for local development
 version: '3.8'
+
 services:
   mongodb:
     image: mongo:6.0
@@ -12,6 +12,10 @@ services:
     volumes:
       - mongodb_data:/data/db
     restart: unless-stopped
+
+  backend:
+    build:
+      context: ./packages/backend
       dockerfile: Dockerfile
     container_name: afterme-backend
     ports:
@@ -25,7 +29,8 @@ services:
     depends_on:
       - mongodb
     restart: unless-stopped
-frontend:
+
+  frontend:
     build:
       context: ./packages/frontend
       dockerfile: Dockerfile
@@ -33,13 +38,12 @@ frontend:
     ports:
       - "3000:3000"
     environment:
-      VITE_API
-      _URL: http://localhost:5000
+      VITE_API_URL: http://localhost:5000
     depends_on:
       - backend
     restart: unless-stopped
 
-ai-service:
+  ai-service:
     build:
       context: ./packages/ai-service
       dockerfile: Dockerfile
@@ -50,32 +54,10 @@ ai-service:
       AI_SERVICE_PORT: 6000
       FLASK_ENV: development
     restart: unless-stopped
+
 volumes:
   mongodb_data:
+
 networks:
-  def
-  ault:
-    name: afterme-network        Afterme1.2/
-    ??? 8 documentation files
-    ??? docker-compose.yml
-    ??? packages/
-    ?   ??? frontend/ (React app)
-    ?   ??? backend/ (Node.js API)
-    ?   ??? ai-service/ (Python ML)
-    *hv??? 80+ source files total    Afterme1.2/
-    ??? 8 documentation files
-    ??? docker-compose.yml
-    ??? packages/
-    ?   ??? frontend/ (React app)
-    ?   ??? backend/ (Node.js API)
-    ?   ??? ai-service/ (Python ML)
-    ??? 80+ source files total    Afterme1.2/
-    ??? 8 documentation files
-    ??? docker-compose.yml
-    ??? packages/
-    ?   ??? frontend/ (React app)
-    ?   ??? backend/ (Node.js API)
-    ?   ??? ai-service/ (Python ML)
-    ??? 80+ source files totalcd /workspaces/Afterme1.2
-    docker-compose up
-    # Visit http://localhost:3000
+  default:
+    name: afterme-network
