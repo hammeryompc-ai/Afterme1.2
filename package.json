@@ -11,7 +11,7 @@
   "scripts": {
     "install-all": "npm install && npm install --workspace=packages/frontend && npm install --workspace=packages/backend && npm install --workspace=packages/ai-service",
     "dev": "concurrently \"npm run dev --workspace=packages/backend\" \"npm run dev --workspace=packages/frontend\" \"npm run dev --workspace=packages/ai-service\"",
-    "build": "npm run build --workspace=packages/frontend && npm run build --workspace=packages/backend",
+    "build": "npm run build --workspace=packages/frontend",
     "start": "npm start --workspace=packages/backend"
   },
   "devDependencies": {
