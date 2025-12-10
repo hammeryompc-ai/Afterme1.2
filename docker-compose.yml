@@ -2,9 +2,12 @@
 # Note: Create a .env file at the repo root for secrets (e.g., JWT_SECRET).
 # Healthchecks ensure services are ready before dependent services start.
 
+version: '3.8'
+
 services:
   mongodb:
     image: mongo:6.0
+    container_name: afterme-mongodb
     ports:
       - "27017:27017"
     environment:
@@ -23,6 +26,7 @@ services:
     build:
       context: ./packages/backend
       dockerfile: Dockerfile
+    container_name: afterme-backend
     ports:
       - "5000:5000"
     env_file:
@@ -47,6 +51,7 @@ services:
     build:
       context: ./packages/frontend
       dockerfile: Dockerfile
+    container_name: afterme-frontend
     ports:
       - "3000:3000"
     environment:
@@ -60,6 +65,7 @@ services:
     build:
       context: ./packages/ai-service
       dockerfile: Dockerfile
+    container_name: afterme-ai-service
     ports:
       - "6000:6000"
     environment:
