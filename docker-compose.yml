@@ -2,7 +2,6 @@
 # Note: Create a .env file at the repo root for secrets (e.g., JWT_SECRET).
 # Healthchecks ensure services are ready before dependent services start.
 
-version: '3.8'
 
 services:
   mongodb:
