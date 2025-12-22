@@ -12,7 +12,11 @@
     "install-all": "npm install && npm install --workspace=packages/frontend && npm install --workspace=packages/backend && npm install --workspace=packages/ai-service",
     "dev": "concurrently \"npm run dev --workspace=packages/backend\" \"npm run dev --workspace=packages/frontend\" \"npm run dev --workspace=packages/ai-service\"",
     "build": "npm run build --workspace=packages/frontend && npm run build --workspace=packages/backend",
-    "start": "npm start --workspace=packages/backend"
+    "start": "npm start --workspace=packages/backend",
+    "mobile:setup": "npm install --workspace=packages/frontend",
+    "mobile:android": "npm run android --workspace=packages/frontend",
+    "mobile:ios": "npm run ios --workspace=packages/frontend",
+    "mobile:sync": "npm run cap:sync --workspace=packages/frontend"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"

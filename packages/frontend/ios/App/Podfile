@@ -1,0 +1,28 @@
+require_relative '../../node_modules/@capacitor/ios/scripts/pods_helpers'
+
+platform :ios, '13.0'
+use_frameworks!
+
+# workaround to avoid Xcode caching of Pods that requires
+# temporary to run in the root of the project
+install! 'cocoapods', :deterministic_uuids => false
+
+def capacitor_pods
+  pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
+  pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
+end
+
+target 'App' do
+  capacitor_pods
+  # Add your Pods here
+  
+  # Note: Capacitor plugins are auto-linked when using `npx cap sync`
+  # The following pods will be added automatically after running cap sync:
+  # - CapacitorSplashScreen
+  # - CapacitorStatusBar  
+  # - CapacitorKeyboard
+end
+
+post_install do |installer|
+  assertDeploymentTarget(installer)
+end

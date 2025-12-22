@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Afterme</string>
+    <string name="title_activity_main">Afterme</string>
+    <string name="package_name">com.afterme.app</string>
+    <string name="custom_url_scheme">afterme</string>
+</resources>

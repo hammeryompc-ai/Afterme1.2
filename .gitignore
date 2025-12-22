@@ -1,0 +1,109 @@
+# Dependencies
+node_modules/
+.npm
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+.env/
+*.egg-info/
+.eggs/
+
+# ===================
+# Mobile Build Artifacts
+# ===================
+
+# Android
+packages/frontend/android/.gradle/
+packages/frontend/android/app/build/
+packages/frontend/android/build/
+packages/frontend/android/capacitor-cordova-android-plugins/build/
+packages/frontend/android/local.properties
+packages/frontend/android/*.iml
+packages/frontend/android/.idea/
+packages/frontend/android/captures/
+packages/frontend/android/.externalNativeBuild/
+packages/frontend/android/.cxx/
+packages/frontend/android/gradle/wrapper/gradle-wrapper.jar
+packages/frontend/android/gradlew
+packages/frontend/android/gradlew.bat
+
+# Android signing keys (NEVER commit these!)
+*.keystore
+*.jks
+key.properties
+
+# iOS
+packages/frontend/ios/App/Pods/
+packages/frontend/ios/App/Podfile.lock
+packages/frontend/ios/App/App.xcworkspace/
+packages/frontend/ios/App/build/
+packages/frontend/ios/App/*.xcuserdatad
+packages/frontend/ios/DerivedData/
+
+# Capacitor
+packages/frontend/android/app/src/main/assets/public/
+packages/frontend/ios/App/App/public/
+
+# Xcode
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+DerivedData/
+
+# App Store submission
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# APK and AAB files
+*.apk
+*.aab
