@@ -1,5 +1,15 @@
 # Getting Started with Afterme
 
+## 🔒 Security First
+
+**Before you begin**: Copy `.env.example` to `.env` in the root directory and configure your local settings. **Never commit `.env` files to version control.** See [SECURITY.md](SECURITY.md) for detailed security practices.
+
+```bash
+# Create your local environment file
+cp .env.example .env
+# Edit .env with your configuration (this file is git-ignored)
+```
+
 ## Quick Start (5 minutes)
 
 ### Option 1: Docker Compose (Recommended)
