@@ -2,7 +2,13 @@
 
 ## Reporting Security Vulnerabilities
 
-If you discover a security vulnerability in AfterMe, please report it by emailing the maintainers. Do NOT open a public issue.
+If you discover a security vulnerability in AfterMe, please report it responsibly:
+
+- **Email**: security@afterme.app (or contact repository maintainers)
+- **Do NOT** open a public issue for security vulnerabilities
+- Include detailed information about the vulnerability and steps to reproduce
+
+We will respond to security reports within 48 hours and work with you to address the issue.
 
 ## Secret Management
 
@@ -41,7 +47,7 @@ If you discover a security vulnerability in AfterMe, please report it by emailin
    - Always use `.env.example` files (without actual secrets) as templates
 
 2. **Use strong, unique secrets**:
-   - Generate JWT secrets with: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+   - Generate JWT secrets with: `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"`
    - Use different secrets for development, staging, and production
    - Never reuse passwords across services
 
@@ -96,9 +102,9 @@ Before deploying to production:
 
 - [ ] All `.env` files are in `.gitignore`
 - [ ] Production secrets are stored in secure environment variables
-- [ ] JWT_SECRET is a strong, randomly generated value
+- [ ] JWT_SECRET is a strong, randomly generated value (64+ bytes)
 - [ ] MongoDB user has minimum required permissions
-- [ ] MongoDB IP whitelist is configured
+- [ ] MongoDB IP whitelist is configured ([MongoDB Atlas Network Access](https://docs.atlas.mongodb.com/security/ip-access-list/))
 - [ ] HTTPS is enabled
 - [ ] CORS is properly configured
 - [ ] Rate limiting is enabled
