@@ -50,9 +50,13 @@ Afterme is a premium messaging platform with Facebook Messenger-level quality, c
 
 ### Option 1: Docker Compose (Recommended)
 
-**Environment Setup:** The backend service loads secrets from a `.env` file in the repo root. A default `.env` is provided for local development with a placeholder `JWT_SECRET`. You can customize it as needed.
+**Environment Setup:** Create your local `.env` file from the example:
 
 ```bash
+# Copy environment template and customize
+cp .env.example .env
+# Edit .env with your local settings (never commit this file)
+
 # Validate configuration before starting
 docker compose -f docker-compose.yml config
 
@@ -65,6 +69,10 @@ docker compose up
 
 ### Option 2: Manual Setup
 ```bash
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your configuration
+
 # Install all dependencies
 npm run install-all
 
@@ -102,11 +110,23 @@ afterme/
 
 ## 🔐 Security
 
+**⚠️ IMPORTANT**: Never commit secrets or credentials to version control. See [SECURITY.md](SECURITY.md) for detailed security guidelines.
+
 - JWT-based authentication
 - Password hashing with bcrypt
 - Protected API endpoints
 - CORS and socket authentication
 - Privacy controls for legacy profiles
+- Environment variable management (`.env` files are git-ignored)
+- Secret rotation procedures documented
+
+### Environment Setup
+
+1. Copy `.env.example` to `.env` in the root directory
+2. Update values with your actual credentials (never commit this file)
+3. For production, use secure secret management services
+
+For detailed security practices, credential rotation, and incident response procedures, see [SECURITY.md](SECURITY.md).
 
 ## 📚 API Overview
 
