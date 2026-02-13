@@ -1,4 +1,4 @@
-# Copilot Instructions for Afterme 1.2
+# Copilot Instructions for Afterme
 
 ## Project Overview
 
