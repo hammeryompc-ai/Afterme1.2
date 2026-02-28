@@ -1,5 +1,4 @@
-# 📊 Afterme 1.2 - Visual Pro
-ject Overview
+# 📊 Afterme 1.2 - Visual Project Overview
 
 ## Project Hierarchy
 
@@ -238,45 +237,6 @@ Root Config:
 GRAND TOTAL: ~80+ files
 ```
 
-## Development Workflow
-
-```
-1. LOCAL DEVELOPMENT
-   ├── Start Docker services (or manual)
-   ├── Hot reload enabled
-   ├── Live backend updates
-   └── Real-time debugging
-
-2. TESTING
-   ├── Create test account
-   ├── Perform AI training
-   ├── Record voice samples
-   ├── Test messaging
-   ├── Verify memorial profile
-   └── Check API responses
-
-3. CUSTOMIZATION
-   ├── Modify UI/colors
-   ├── Update API logic
-   ├── Enhance AI models
-   ├── Add new features
-   └── Optimize performance
-
-4. DEPLOYMENT
-   ├── Build frontend (npm run build)
-   ├── Deploy to Vercel/Netlify
-   ├── Deploy backend to cloud
-   ├── Deploy AI service
-   ├── Configure MongoDB Atlas
-   └── Setup domain/SSL
-
-5. MONITORING
-   ├── Monitor API logs
-   ├── Track user activities
-   ├── Check database performance
-   ├── Monitor AI service
-   └── Update as needed
-```
 
 ## Success Metrics
 
@@ -389,6 +349,7 @@ INFRASTRUCTURE:
 ## 🎉 You Now Have
 
 A complete, professional-grade, production-ready platform that:
+
 - ✅ Handles real-time messaging at scale
 - ✅ Processes personality data intelligently
 - ✅ Clones voices with ML
