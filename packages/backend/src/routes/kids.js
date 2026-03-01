@@ -42,9 +42,23 @@ router.get('/:id', authMiddleware, async (req, res) => {
 // Update capsule
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
+    // Only allow specific fields to be updated to avoid NoSQL injection via operators
+    const allowedUpdates = ['title', 'content', 'openAt']
+    const updates = {}
+
+    for (const [key, value] of Object.entries(req.body || {})) {
+      // Disallow MongoDB operators or attempts to override protected fields
+      if (key.startsWith('$') || key === '_id' || key === 'creatorId' || key === 'status' || key === 'sealedAt') {
+        continue
+      }
+      if (allowedUpdates.includes(key)) {
+        updates[key] = value
+      }
+    }
+
     const capsule = await TimeCapsule.findOneAndUpdate(
       { _id: req.params.id, creatorId: req.userId },
-      req.body,
+      { $set: updates },
       { new: true }
     )
     if (!capsule) return res.status(404).json({ message: 'Capsule not found' })
