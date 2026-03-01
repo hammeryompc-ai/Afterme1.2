@@ -9,6 +9,15 @@ import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
 import conversationRoutes from './routes/conversations.js'
 import aiRoutes from './routes/ai.js'
+import vaultRoutes from './routes/vault.js'
+import guardianRoutes from './routes/guardian.js'
+import timecapsuleRoutes from './routes/timecapsule.js'
+import familyRoutes from './routes/family.js'
+import biographyRoutes from './routes/biography.js'
+import estateRoutes from './routes/estate.js'
+import cryptoRoutes from './routes/crypto.js'
+import creatorRoutes from './routes/creator.js'
+import adminRoutes from './routes/admin.js'
 
 dotenv.config()
 
@@ -35,6 +44,15 @@ app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/conversations', conversationRoutes)
 app.use('/api/ai', aiRoutes)
+app.use('/api/vault', vaultRoutes)
+app.use('/api/guardian', guardianRoutes)
+app.use('/api/timecapsule', timecapsuleRoutes)
+app.use('/api/family', familyRoutes)
+app.use('/api/biography', biographyRoutes)
+app.use('/api/estate', estateRoutes)
+app.use('/api/crypto', cryptoRoutes)
+app.use('/api/creator', creatorRoutes)
+app.use('/api/admin', adminRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
