@@ -62,9 +62,32 @@ router.post('/', authMiddleware, async (req, res) => {
 // Update an entry
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
+    const {
+      walletLabel,
+      walletType,
+      walletAddress,
+      multiSigConfig,
+      triggerCondition,
+      inactivityDays,
+      beneficiaryEmail,
+      beneficiaryShare,
+      notes
+    } = req.body
+
+    const updateData = {}
+    if (walletLabel !== undefined) updateData.walletLabel = walletLabel
+    if (walletType !== undefined) updateData.walletType = walletType
+    if (walletAddress !== undefined) updateData.walletAddress = walletAddress
+    if (multiSigConfig !== undefined) updateData.multiSigConfig = multiSigConfig
+    if (triggerCondition !== undefined) updateData.triggerCondition = triggerCondition
+    if (inactivityDays !== undefined) updateData.inactivityDays = inactivityDays
+    if (beneficiaryEmail !== undefined) updateData.beneficiaryEmail = beneficiaryEmail
+    if (beneficiaryShare !== undefined) updateData.beneficiaryShare = beneficiaryShare
+    if (notes !== undefined) updateData.notes = notes
+
     const entry = await CryptoInheritance.findOneAndUpdate(
       { _id: req.params.id, userId: req.userId },
-      req.body,
+      updateData,
       { new: true }
     )
     if (!entry) return res.status(404).json({ message: 'Entry not found' })
