@@ -9,6 +9,16 @@ import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
 import conversationRoutes from './routes/conversations.js'
 import aiRoutes from './routes/ai.js'
+import conciergeRoutes from './routes/concierge.js'
+import guardianRoutes from './routes/guardian.js'
+import kidsRoutes from './routes/kids.js'
+import familyRoutes from './routes/family.js'
+import biographerRoutes from './routes/biographer.js'
+import bankingRoutes from './routes/banking.js'
+import cryptoRoutes from './routes/crypto.js'
+import creatorRoutes from './routes/creator.js'
+import tenantRoutes from './routes/tenant.js'
+import executorRoutes from './routes/executor.js'
 
 dotenv.config()
 
@@ -35,6 +45,16 @@ app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/conversations', conversationRoutes)
 app.use('/api/ai', aiRoutes)
+app.use('/api/concierge', conciergeRoutes)
+app.use('/api/guardian', guardianRoutes)
+app.use('/api/kids', kidsRoutes)
+app.use('/api/family', familyRoutes)
+app.use('/api/biographer', biographerRoutes)
+app.use('/api/banking', bankingRoutes)
+app.use('/api/crypto', cryptoRoutes)
+app.use('/api/creator', creatorRoutes)
+app.use('/api/tenant', tenantRoutes)
+app.use('/api/executor', executorRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
