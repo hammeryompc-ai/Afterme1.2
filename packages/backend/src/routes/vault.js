@@ -180,9 +180,18 @@ router.post('/contacts', authMiddleware, async (req, res) => {
 // Update trusted contact
 router.put('/contacts/:id', authMiddleware, async (req, res) => {
   try {
+    // Only allow specific fields to be updated to avoid NoSQL injection via operators
+    const allowedFields = ['name', 'email', 'phone', 'relationship', 'notes']
+    const updateData = {}
+    for (const field of allowedFields) {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        updateData[field] = req.body[field]
+      }
+    }
+
     const contact = await TrustedContact.findOneAndUpdate(
       { _id: req.params.id, userId: req.userId },
-      req.body,
+      updateData,
       { new: true }
     )
     if (!contact) return res.status(404).json({ message: 'Contact not found' })
