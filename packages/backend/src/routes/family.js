@@ -127,9 +127,21 @@ router.delete('/plan/members/:memberId', authMiddleware, async (req, res) => {
 // Update plan settings
 router.put('/plan', authMiddleware, async (req, res) => {
   try {
+    // Only allow specific plan fields to be updated
+    const allowedFields = ['name', 'settings']; // adjust this whitelist as needed
+    const updateData = {};
+
+    for (const field of allowedFields) {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        updateData[field] = req.body[field];
+      }
+    }
+
+    const update = Object.keys(updateData).length > 0 ? { $set: updateData } : {};
+
     const plan = await FamilyPlan.findOneAndUpdate(
       { ownerId: req.userId, isActive: true },
-      req.body,
+      update,
       { new: true }
     )
     if (!plan) return res.status(404).json({ message: 'No active family plan found' })
