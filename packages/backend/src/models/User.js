@@ -64,7 +64,44 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    lastSeen: Date
+    lastSeen: Date,
+
+    // AI Guardian settings
+    guardianSettings: {
+      checkInFrequency: {
+        type: String,
+        enum: ['daily', 'weekly', 'monthly'],
+        default: 'weekly'
+      },
+      checkInTime: String,
+      triggerConditions: [String],
+      safetyRules: [String],
+      emergencyMessage: String
+    },
+
+    // Organization profile (nonprofit / government lane)
+    orgProfile: {
+      orgName: String,
+      orgType: {
+        type: String,
+        enum: ['nonprofit', 'government', 'bank', 'other']
+      },
+      ein: String,
+      contactEmail: String,
+      programDescription: String,
+      consentFramework: String
+    },
+
+    // Consent log
+    consentLog: [
+      {
+        consentType: String,
+        consentText: String,
+        accepted: Boolean,
+        recordedAt: Date,
+        ipAddress: String
+      }
+    ]
   },
   { timestamps: true }
 )
