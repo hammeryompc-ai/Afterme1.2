@@ -1,6 +1,10 @@
 import express from 'express'
 import { authMiddleware } from '../middleware/auth.js'
 import User from '../models/User.js'
+import Document from '../models/Document.js'
+import JournalEntry from '../models/JournalEntry.js'
+import TimeCapsule from '../models/TimeCapsule.js'
+import EstateCase from '../models/EstateCase.js'
 
 const router = express.Router()
 
@@ -49,16 +53,26 @@ router.get('/dashboard', authMiddleware, async (req, res) => {
       return res.status(403).json({ message: 'Organization profile required' })
     }
 
-    // In production: pull real metrics from analytics service
+    // In production: pull metrics scoped to the organisation's tenant
+    const [totalUsers, activeUsers, documentsVaulted, timeCapsulesSent, journalEntries, estateCasesOpened] =
+      await Promise.all([
+        User.countDocuments(),
+        User.countDocuments({ isOnline: true }),
+        Document.countDocuments({ isArchived: false }),
+        TimeCapsule.countDocuments({ isDelivered: true }),
+        JournalEntry.countDocuments(),
+        EstateCase.countDocuments()
+      ])
+
     res.json({
       organization: user.orgProfile.orgName,
       metrics: {
-        totalUsers: 0,
-        activeUsers: 0,
-        documentsVaulted: 0,
-        timeCapsulesSent: 0,
-        journalEntries: 0,
-        estateCasesOpened: 0
+        totalUsers,
+        activeUsers,
+        documentsVaulted,
+        timeCapsulesSent,
+        journalEntries,
+        estateCasesOpened
       },
       reportGeneratedAt: new Date()
     })

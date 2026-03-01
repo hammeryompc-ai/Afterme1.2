@@ -93,7 +93,8 @@ router.post('/generate', authMiddleware, async (req, res) => {
       return res.status(400).json({ message: 'Add timeline entries before generating your autobiography' })
     }
 
-    // In production: call AI service with timeline + media transcriptions
+    // TODO: In production, call the AI service with the timeline entries
+    // and any media transcriptions to generate a personalised autobiography.
     const draft = bio.timelineEntries
       .map((e) => `In ${e.year || 'an unknown year'}: ${e.title || ''} — ${e.description || ''}`)
       .join('\n\n')

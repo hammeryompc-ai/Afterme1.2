@@ -4,6 +4,7 @@ import { Server } from 'socket.io'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import rateLimit from 'express-rate-limit'
 import { authMiddleware, verifyToken } from './middleware/auth.js'
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
@@ -33,6 +34,27 @@ const io = new Server(server, {
 // Middleware
 app.use(cors())
 app.use(express.json())
+
+// Rate limiting — apply globally to all API routes
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests, please try again later.' }
+})
+
+// Stricter limit for auth endpoints
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many auth attempts, please try again later.' }
+})
+
+app.use('/api/', apiLimiter)
+app.use('/api/auth/', authLimiter)
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/afterme')

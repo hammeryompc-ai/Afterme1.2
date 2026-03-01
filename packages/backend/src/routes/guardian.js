@@ -131,14 +131,16 @@ router.get('/contacts', authMiddleware, async (req, res) => {
 // ── Internal helper ───────────────────────────────────────────────────────────
 
 async function triggerMoodAlert(userId, mood) {
-  // In production: send email/push notification to guardian contacts
+  // TODO: In production, integrate with email/SMS/push notification service
+  // to notify guardian contacts when a low/poor mood check-in is recorded.
   const contacts = await TrustedContact.find({
     userId,
     'alertPreferences.lowMoodDetected': true
   })
   // contacts.forEach(c => sendAlert(c, mood))
-  // Placeholder: log the alert
-  console.log(`[Guardian] Mood alert triggered for user ${userId}: ${mood}. Contacts to notify: ${contacts.length}`)
+  if (contacts.length > 0) {
+    console.log(`[Guardian] Mood alert (${mood}) for user ${userId}: ${contacts.length} contact(s) to notify`)
+  }
 }
 
 export default router
