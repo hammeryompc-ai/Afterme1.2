@@ -113,6 +113,13 @@ router.post('/generate', authMiddleware, async (req, res) => {
 router.put('/publish', authMiddleware, async (req, res) => {
   try {
     const { publishStatus } = req.body
+
+    // Validate publishStatus to ensure it is a simple, expected value
+    const allowedStatuses = ['draft', 'published', 'private']
+    if (typeof publishStatus !== 'string' || !allowedStatuses.includes(publishStatus)) {
+      return res.status(400).json({ message: 'Invalid publish status' })
+    }
+
     const bio = await Biography.findOneAndUpdate(
       { userId: req.userId },
       { publishStatus },
