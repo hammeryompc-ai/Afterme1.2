@@ -88,10 +88,23 @@ router.post('/:id/forms', authMiddleware, async (req, res) => {
       userId: req.userId
     })
     if (!probateCase) return res.status(404).json({ message: 'Case not found' })
+
+    const allowedFormTypes = [
+      'petition_for_probate',
+      'notice_to_creditors',
+      'inventory_of_estate',
+      'final_accounting',
+      'distribution_order'
+    ]
+    const formType = req.body.formType
+    if (!allowedFormTypes.includes(formType)) {
+      return res.status(400).json({ message: 'Invalid form type' })
+    }
+
     const form = {
-      formType: req.body.formType,
-      title: req.body.title || `${req.body.formType} Form`,
-      fileUrl: `forms/${probateCase._id}/${req.body.formType}-${Date.now()}.pdf`,
+      formType,
+      title: req.body.title || `${formType.replace(/_/g, ' ')} Form`,
+      fileUrl: `forms/${probateCase._id}/${formType}-${Date.now()}.pdf`,
       generatedAt: new Date()
     }
     probateCase.generatedForms.push(form)

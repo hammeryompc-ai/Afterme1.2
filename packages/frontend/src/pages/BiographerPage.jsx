@@ -58,7 +58,7 @@ export default function BiographerPage() {
     e.preventDefault()
     setLoading(true)
     try {
-      const { data: timeline } = await biographerAPI.addTimeline(selected._id, form)
+      await biographerAPI.addTimeline(selected._id, form)
       toast.success('Timeline entry added')
       setForm({})
       const { data } = await biographerAPI.getProject(selected._id)

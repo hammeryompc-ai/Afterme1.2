@@ -235,7 +235,7 @@ export default function ConciergePage() {
               <form onSubmit={handleAddPassword} className="space-y-4">
                 <input required placeholder="Service / Website" value={form.service || ''} onChange={(e) => setForm({ ...form, service: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none" />
                 <input placeholder="Username / Email" value={form.username || ''} onChange={(e) => setForm({ ...form, username: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none" />
-                <input type="password" placeholder="Password" value={form.encryptedPassword || ''} onChange={(e) => setForm({ ...form, encryptedPassword: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none" />
+                <input type="password" placeholder="Password" value={form.password || ''} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none" />
                 <input placeholder="Notes" value={form.notes || ''} onChange={(e) => setForm({ ...form, notes: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none" />
                 <button type="submit" disabled={loading} className="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-5 rounded-lg disabled:opacity-50 transition">
                   <Key size={16} /> Save Password

@@ -4,6 +4,7 @@ import { Server } from 'socket.io'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import rateLimit from 'express-rate-limit'
 import { authMiddleware, verifyToken } from './middleware/auth.js'
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
@@ -34,6 +35,15 @@ const io = new Server(server, {
 // Middleware
 app.use(cors())
 app.use(express.json())
+
+// Global rate limiter: max 100 requests per 15 minutes per IP
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false
+})
+app.use('/api', limiter)
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/afterme')

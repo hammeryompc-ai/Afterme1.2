@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { v4 as uuidv4 } from 'uuid'
 
 const probateCaseSchema = new mongoose.Schema(
   {
@@ -81,7 +82,7 @@ const probateCaseSchema = new mongoose.Schema(
 
 probateCaseSchema.pre('save', function (next) {
   if (!this.caseNumber) {
-    this.caseNumber = `PRB-${Date.now()}-${Math.floor(Math.random() * 10000)}`
+    this.caseNumber = `PRB-${uuidv4()}`
   }
   next()
 })

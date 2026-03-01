@@ -100,7 +100,7 @@ router.post('/:id/consent', authMiddleware, async (req, res) => {
       userId: req.userId,
       consentedAt: new Date(),
       version: org.consentFramework.consentVersion,
-      ipAddress: req.ip
+      ipAddress: req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip
     })
     await org.save()
     res.json({ message: 'Consent recorded' })
