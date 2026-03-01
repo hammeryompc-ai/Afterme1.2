@@ -162,7 +162,7 @@ router.post('/memorialization/activate', authMiddleware, async (req, res) => {
 // Interact with AI legacy
 router.post('/legacy/chat', async (req, res) => {
   try {
-    const { userId, message } = req.body
+    const { userId } = req.body
 
     const user = await User.findById(userId)
     if (!user?.isMemorialized) {
