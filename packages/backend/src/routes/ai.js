@@ -3,6 +3,7 @@ import { authMiddleware } from '../middleware/auth.js'
 import User from '../models/User.js'
 import AITrainingData from '../models/AITrainingData.js'
 import { v4 as uuidv4 } from 'uuid'
+import mongoose from 'mongoose'
 
 const router = express.Router()
 
@@ -163,6 +164,10 @@ router.post('/memorialization/activate', authMiddleware, async (req, res) => {
 router.post('/legacy/chat', async (req, res) => {
   try {
     const { userId, message } = req.body
+
+    if (typeof userId !== 'string' || !mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid userId' })
+    }
 
     const user = await User.findById(userId)
     if (!user?.isMemorialized) {
