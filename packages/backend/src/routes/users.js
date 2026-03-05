@@ -44,7 +44,7 @@ router.put('/profile', authMiddleware, async (req, res) => {
     const { firstName, lastName, bio, profilePhoto } = req.body
 
     const user = await User.findByIdAndUpdate(
-      req.userId,
+      { $eq: req.userId },
       { firstName, lastName, bio, profilePhoto },
       { new: true }
     )
