@@ -56,4 +56,7 @@ const familyPlanSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+familyPlanSchema.index({ ownerId: 1 })
+familyPlanSchema.index({ 'members.userId': 1 })
+
 export default mongoose.model('FamilyPlan', familyPlanSchema)

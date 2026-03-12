@@ -73,4 +73,6 @@ const cryptoInheritanceSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+cryptoInheritanceSchema.index({ userId: 1 })
+
 export default mongoose.model('CryptoInheritance', cryptoInheritanceSchema)

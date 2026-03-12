@@ -87,4 +87,6 @@ probateCaseSchema.pre('save', function (next) {
   next()
 })
 
+probateCaseSchema.index({ userId: 1 })
+
 export default mongoose.model('ProbateCase', probateCaseSchema)
