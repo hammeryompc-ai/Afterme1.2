@@ -18,6 +18,7 @@ import CryptoPage from './pages/CryptoPage'
 import CreatorPage from './pages/CreatorPage'
 import TenantPage from './pages/TenantPage'
 import ExecutorPage from './pages/ExecutorPage'
+import AvatarPage from './pages/AvatarPage'
 import ProtectedRoute from './components/ProtectedRoute'
 
 export default function App() {
@@ -136,6 +137,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <ExecutorPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/avatar"
+          element={
+            <ProtectedRoute>
+              <AvatarPage />
             </ProtectedRoute>
           }
         />

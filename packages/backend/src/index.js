@@ -20,6 +20,7 @@ import cryptoRoutes from './routes/crypto.js'
 import creatorRoutes from './routes/creator.js'
 import tenantRoutes from './routes/tenant.js'
 import executorRoutes from './routes/executor.js'
+import avatarRoutes from './routes/avatar.js'
 
 dotenv.config()
 
@@ -65,6 +66,7 @@ app.use('/api/crypto', cryptoRoutes)
 app.use('/api/creator', creatorRoutes)
 app.use('/api/tenant', tenantRoutes)
 app.use('/api/executor', executorRoutes)
+app.use('/api/avatar', avatarRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
