@@ -143,6 +143,31 @@ export const tenantAPI = {
   recordConsent: (id) => api.post(`/tenant/${id}/consent`)
 }
 
+export const avatarAPI = {
+  getAvatar: () => api.get('/avatar'),
+  updateAvatar: (data) => api.put('/avatar', data),
+  uploadPhoto: () => api.post('/avatar/photo'),
+  upgradeTier: (tier) => api.put('/avatar/tier', { tier }),
+  // Goals
+  getGoals: () => api.get('/avatar/goals'),
+  addGoal: (data) => api.post('/avatar/goals', data),
+  updateGoal: (goalId, data) => api.put(`/avatar/goals/${goalId}`, data),
+  deleteGoal: (goalId) => api.delete(`/avatar/goals/${goalId}`),
+  // Check-ins
+  checkIn: (data) => api.post('/avatar/checkin', data),
+  // Reminders
+  addReminder: (data) => api.post('/avatar/reminders', data),
+  completeReminder: (reminderId) => api.put(`/avatar/reminders/${reminderId}`, { completed: true }),
+  // Coaching
+  sendCoachingMessage: (message, sessionType) => api.post('/avatar/coaching', { message, sessionType }),
+  getCoachingHistory: () => api.get('/avatar/coaching/history'),
+  // Legacy
+  updateLegacy: (data) => api.put('/avatar/legacy', data),
+  activateLegacyMode: () => api.post('/avatar/legacy/activate'),
+  chatWithLegacy: (userId, message) => api.post('/avatar/legacy/chat', { userId, message }),
+  getLegacyAvatar: (userId) => api.get(`/avatar/legacy/${userId}`)
+}
+
 export const executorAPI = {
   getCases: () => api.get('/executor'),
   createCase: (data) => api.post('/executor', data),

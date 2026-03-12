@@ -2,10 +2,17 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   FolderLock, ShieldCheck, Baby, Users, BookOpen,
-  Landmark, Bitcoin, Star, Building2, Scale, MessageSquare, User
+  Landmark, Bitcoin, Star, Building2, Scale, MessageSquare, User, Bot
 } from 'lucide-react'
 
 const features = [
+  {
+    path: '/avatar',
+    icon: Bot,
+    title: 'AI Avatar & Life Coach',
+    description: 'Your personal AI avatar — life assistant, goal coach & legacy memorial in one.',
+    color: 'from-violet-500 to-purple-600'
+  },
   {
     path: '/concierge',
     icon: FolderLock,
