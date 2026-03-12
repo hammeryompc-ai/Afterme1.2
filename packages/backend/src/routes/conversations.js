@@ -15,6 +15,7 @@ router.get('/', authMiddleware, async (req, res) => {
       .populate('participants', '-password')
       .populate('lastMessage')
       .sort({ updatedAt: -1 })
+      .lean()
 
     res.json(conversations)
   } catch (error) {

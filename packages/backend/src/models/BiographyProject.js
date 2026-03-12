@@ -50,4 +50,6 @@ const biographyProjectSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+biographyProjectSchema.index({ userId: 1 })
+
 export default mongoose.model('BiographyProject', biographyProjectSchema)

@@ -39,4 +39,7 @@ const timeCapsuleSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+timeCapsuleSchema.index({ creatorId: 1 })
+timeCapsuleSchema.index({ status: 1 })
+
 export default mongoose.model('TimeCapsule', timeCapsuleSchema)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Plus, Users, FolderOpen, Clock, UserPlus } from 'lucide-react'
 import toast from 'react-hot-toast'
@@ -87,6 +87,11 @@ export default function FamilyPage() {
     { id: 'timeline', label: 'Family Timeline', icon: Clock },
     { id: 'members', label: 'Members', icon: UserPlus }
   ]
+
+  const sortedTimeline = useMemo(
+    () => [...(selected?.sharedTimeline || [])].sort((a, b) => new Date(b.date) - new Date(a.date)),
+    [selected?.sharedTimeline]
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -214,7 +219,7 @@ export default function FamilyPage() {
                       <h3 className="font-bold text-gray-900 text-lg mb-4">Family Timeline</h3>
                       {selected?.sharedTimeline?.length === 0 && <p className="text-gray-500 text-sm">No events yet.</p>}
                       <ul className="space-y-4">
-                        {[...(selected?.sharedTimeline || [])].sort((a, b) => new Date(b.date) - new Date(a.date)).map((ev) => (
+                        {sortedTimeline.map((ev) => (
                           <li key={ev._id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
                             <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0" />
                             <div>

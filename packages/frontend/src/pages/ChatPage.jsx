@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Send, Phone, Search, Home, User, LogOut, Plus } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { chatAPI, userAPI } from '../services/api'
@@ -31,6 +31,7 @@ export default function ChatPage() {
   const [searchResults, setSearchResults] = useState([])
   const [loading, setLoading] = useState(true)
   const messagesEndRef = useRef(null)
+  const typingTimeoutRef = useRef(null)
 
   useEffect(() => {
     loadConversations()
@@ -65,6 +66,9 @@ export default function ChatPage() {
       socket.off(socketEvents.MESSAGE_RECEIVED)
       socket.off(socketEvents.TYPING_START)
       socket.off(socketEvents.TYPING_STOP)
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current)
+      }
     }
   }, [])
 
@@ -158,18 +162,25 @@ export default function ChatPage() {
     }
   }
 
-  const handleTyping = () => {
+  const handleTyping = useCallback(() => {
     const socket = getSocket()
+    if (!currentConversation) return
+
     socket.emit(socketEvents.TYPING_START, {
-      conversationId: currentConversation?.id
+      conversationId: currentConversation.id
     })
 
-    setTimeout(() => {
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current)
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
       socket.emit(socketEvents.TYPING_STOP, {
-        conversationId: currentConversation?.id
+        conversationId: currentConversation.id
       })
+      typingTimeoutRef.current = null
     }, 3000)
-  }
+  }, [currentConversation])
 
   if (loading) {
     return <div className="h-screen flex items-center justify-center">Loading...</div>

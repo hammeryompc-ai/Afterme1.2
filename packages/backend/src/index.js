@@ -20,6 +20,7 @@ import cryptoRoutes from './routes/crypto.js'
 import creatorRoutes from './routes/creator.js'
 import tenantRoutes from './routes/tenant.js'
 import executorRoutes from './routes/executor.js'
+import Conversation from './models/Conversation.js'
 
 dotenv.config()
 
@@ -113,9 +114,19 @@ io.on('connection', (socket) => {
     })
   })
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', async () => {
     console.log(`User disconnected: ${socket.userId}`)
-    io.emit('user:offline', socket.userId)
+    try {
+      const userConversations = await Conversation.find(
+        { participants: socket.userId },
+        '_id'
+      ).lean()
+      userConversations.forEach(({ _id }) => {
+        io.to(_id.toString()).emit('user:offline', socket.userId)
+      })
+    } catch {
+      // fail silently – offline notification is non-critical
+    }
   })
 })
 

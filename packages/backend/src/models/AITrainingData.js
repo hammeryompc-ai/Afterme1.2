@@ -23,4 +23,7 @@ const aiTrainingDataSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+aiTrainingDataSchema.index({ userId: 1 })
+aiTrainingDataSchema.index({ userId: 1, type: 1 })
+
 export default mongoose.model('AITrainingData', aiTrainingDataSchema)

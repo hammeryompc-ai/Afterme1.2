@@ -74,4 +74,7 @@ const tenantOrganizationSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+tenantOrganizationSchema.index({ adminUserId: 1 })
+tenantOrganizationSchema.index({ 'members.userId': 1 })
+
 export default mongoose.model('TenantOrganization', tenantOrganizationSchema)

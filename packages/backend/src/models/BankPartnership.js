@@ -58,4 +58,6 @@ const bankPartnershipSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+bankPartnershipSchema.index({ userId: 1 })
+
 export default mongoose.model('BankPartnership', bankPartnershipSchema)
