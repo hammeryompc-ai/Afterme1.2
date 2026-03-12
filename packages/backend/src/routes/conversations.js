@@ -102,7 +102,7 @@ router.put('/:conversationId/read', authMiddleware, async (req, res) => {
       { read: true, readAt: new Date() }
     )
 
-    await Conversation.findByIdAndUpdate(req.params.conversationId, {
+    await Conversation.findByIdAndUpdate({ $eq: req.params.conversationId }, {
       [`unreadCounts.${req.userId}`]: 0
     })
 
