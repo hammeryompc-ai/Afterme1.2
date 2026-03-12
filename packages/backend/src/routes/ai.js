@@ -163,7 +163,7 @@ router.post('/memorialization/activate', authMiddleware, async (req, res) => {
 // Interact with AI legacy
 router.post('/legacy/chat', async (req, res) => {
   try {
-    const { userId, message } = req.body
+    const { userId } = req.body
 
     if (typeof userId !== 'string' || !mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ message: 'Invalid userId' })
